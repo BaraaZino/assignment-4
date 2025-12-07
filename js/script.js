@@ -528,11 +528,12 @@ const GitHubFeed = (() => {
 
     setStatus("Loading GitHub repositories...");
     try {
-      const response = await fetch(API_URL, {
-        headers: { Accept: "application/vnd.github+json" },
-      });
+      const response = await fetch(API_URL, { cache: "no-store" });
 
       if (!response.ok) {
+        if (response.status === 403) {
+          throw new Error("GitHub rate limit hit. Please try again in a few minutes.");
+        }
         throw new Error(`GitHub responded with ${response.status}`);
       }
 
@@ -552,7 +553,7 @@ const GitHubFeed = (() => {
     } catch (error) {
       console.error(error);
       reposContainer.innerHTML = "";
-      setStatus("Unable to load GitHub activity. Please try again shortly.", "error");
+      setStatus(error.message || "Unable to load GitHub activity. Please try again shortly.", "error");
     }
   };
 
