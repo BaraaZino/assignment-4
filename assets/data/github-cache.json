@@ -1,0 +1,52 @@
+[
+  {
+    "name": "assignment-4",
+    "html_url": "https://github.com/BaraaZino/assignment-4",
+    "description": "Final SWE 363 portfolio deployment with services section and GitHub feed.",
+    "language": "HTML",
+    "stargazers_count": 0,
+    "forks_count": 0,
+    "updated_at": "2024-09-15T00:00:00Z",
+    "topics": ["portfolio", "vanilla-js", "swe363"]
+  },
+  {
+    "name": "assignment-3",
+    "html_url": "https://github.com/BaraaZino/assignment-3",
+    "description": "Assignment 3 milestone featuring GitHub API integration and graduation countdown.",
+    "language": "JavaScript",
+    "stargazers_count": 0,
+    "forks_count": 0,
+    "updated_at": "2024-06-10T00:00:00Z",
+    "topics": ["api", "javascript", "portfolio"]
+  },
+  {
+    "name": "SWE363-Project",
+    "html_url": "https://github.com/BaraaZino/SWE363-Project",
+    "description": "Khadamaty service hub prototype for SWE 363 course project.",
+    "language": "HTML",
+    "stargazers_count": 0,
+    "forks_count": 0,
+    "updated_at": "2023-12-05T00:00:00Z",
+    "topics": ["swe363", "ux", "marketplace"]
+  },
+  {
+    "name": "assignment-2",
+    "html_url": "https://github.com/BaraaZino/assignment-2",
+    "description": "Personal portfolio refresh with personalization and contact form validation.",
+    "language": "CSS",
+    "stargazers_count": 0,
+    "forks_count": 0,
+    "updated_at": "2024-04-18T00:00:00Z",
+    "topics": ["css", "personalization", "portfolio"]
+  },
+  {
+    "name": "Jarir-NLP",
+    "html_url": "https://github.com/A1maan/Jarir-NLP",
+    "description": "Collaborative NLP toolkit exploration for Jarir Bookstore.",
+    "language": "Python",
+    "stargazers_count": 1,
+    "forks_count": 0,
+    "updated_at": "2024-09-01T00:00:00Z",
+    "topics": ["nlp", "pytorch", "collaboration"]
+  }
+]

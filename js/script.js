@@ -420,6 +420,7 @@ const ProjectControls = (() => {
 const GitHubFeed = (() => {
   const USERNAME = "baraazino";
   const API_URL = `https://api.github.com/users/${USERNAME}/repos?sort=updated&per_page=5`;
+  const FALLBACK_URL = "assets/data/github-cache.json";
   const CACHE_WINDOW_MS = 3 * 60 * 1000;
 
   let reposContainer;
@@ -427,6 +428,8 @@ const GitHubFeed = (() => {
   let refreshButton;
   let cachedRepos = null;
   let lastFetched = 0;
+  let triedFallback = false;
+  let fallbackData = null;
 
   const formatDate = (timestamp) => {
     try {
@@ -438,6 +441,37 @@ const GitHubFeed = (() => {
       return formatter.format(new Date(timestamp));
     } catch {
       return "";
+    }
+  };
+
+  const loadFallback = async (force = false) => {
+    if (fallbackData && !force) {
+      renderRepos(fallbackData);
+      setStatus("Showing a saved GitHub snapshot while the live feed recovers.", "info");
+      return true;
+    }
+
+    if (triedFallback && !force) {
+      return Boolean(fallbackData);
+    }
+    triedFallback = true;
+
+    try {
+      const response = await fetch(FALLBACK_URL, { cache: "no-store" });
+      if (!response.ok) {
+        throw new Error("Fallback snapshot missing.");
+      }
+      const data = await response.json();
+      if (!Array.isArray(data) || !data.length) {
+        throw new Error("Fallback snapshot empty.");
+      }
+      fallbackData = data;
+      renderRepos(fallbackData);
+      setStatus("Showing a saved GitHub snapshot while the live feed recovers.", "info");
+      return true;
+    } catch (fallbackError) {
+      console.error("Fallback load failed:", fallbackError);
+      return false;
     }
   };
 
@@ -528,13 +562,22 @@ const GitHubFeed = (() => {
 
     setStatus("Loading GitHub repositories...");
     try {
-      const response = await fetch(API_URL, { cache: "no-store" });
+      const response = await fetch(API_URL, {
+        cache: "no-store",
+        headers: { Accept: "application/vnd.github+json" },
+      });
 
       if (!response.ok) {
-        if (response.status === 403) {
-          throw new Error("GitHub rate limit hit. Please try again in a few minutes.");
+        let errorMessage = `GitHub responded with ${response.status}`;
+        try {
+          const errorData = await response.json();
+          if (errorData?.message) {
+            errorMessage = errorData.message;
+          }
+        } catch {
+          // ignore json parse errors
         }
-        throw new Error(`GitHub responded with ${response.status}`);
+        throw new Error(errorMessage);
       }
 
       const data = await response.json();
@@ -552,8 +595,16 @@ const GitHubFeed = (() => {
       setStatus("Synced with GitHub moments ago.", "success");
     } catch (error) {
       console.error(error);
+      const fallbackLoaded = await loadFallback();
+      if (fallbackLoaded) {
+        return;
+      }
       reposContainer.innerHTML = "";
-      setStatus(error.message || "Unable to load GitHub activity. Please try again shortly.", "error");
+      const message =
+        error?.message?.toLowerCase().includes("rate limit") || error?.message?.toLowerCase().includes("api rate limit")
+          ? "GitHub rate limit hit for anonymous requests. Please try again in an hour or view my GitHub profile directly."
+          : error?.message || "Unable to load GitHub activity. Please try again shortly.";
+      setStatus(message, "error");
     }
   };
 

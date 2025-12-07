@@ -70,6 +70,14 @@
 - **Edits & Integration:** Implemented a `updateToggleUI` helper, wired it into `applyTheme`, and tweaked CSS to give the label a fixed min-width. Also added extra header spacing per my own design eye.  
 - **What I Learned:** Modularizing theme code keeps the UI synced with state, and small CSS tweaks (min-width, gap) prevent layout shifts when labels change.
 
+### 9. GitHub Fallback Strategy
+- **Tool:** ChatGPT-5 Codex  
+- **Prompt:** “How should I handle GitHub API rate limits on a static site so the section still shows data? I was thinking about loading a local snapshot when the API fails.”  
+- **AI Output (excerpt):**  
+  > Bundle a static JSON file as a snapshot, attempt the live fetch first, and if it fails (especially with 403 rate-limit errors) render the local data instead with a friendly status message.  
+- **Edits & Integration:** Added `assets/data/github-cache.json`, wired the GitHub module to load it when the live call fails, and updated the README/technical docs to explain the behavior.  
+- **What I Learned:** Offering a fallback keeps the UX professional and avoids exposing transient API errors to visitors.
+
 ### 9. Presentation Outline & Storytelling
 - **Tool:** ChatGPT-5 Codex  
 - **Prompt:** “Help me craft a 6–7 minute presentation for this portfolio: include intro, demo beats, architecture overview, AI highlights, deep dive, conclusion, and future work.”  

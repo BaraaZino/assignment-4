@@ -20,7 +20,7 @@ Assignment 4 delivers the production-ready version of my single-page portfolio. 
 - **Personalization module:** Stores a visitor's preferred name, reflects it in greetings, and injects it into the contact form when possible.
 - **Spotlight tabs:** Accessible buttons (`aria-selected`, `aria-controls`) animate between focus-area cards.
 - **Project cards:** Accordions expose extra project details while `localStorage` tracks grid sorting and visibility preferences.
-- **GitHub feed:** Fetches `https://api.github.com/users/baraazino/repos?sort=updated&per_page=5`, caches responses for three minutes, and surfaces status updates for loading/error/cached states.
+- **GitHub feed:** Fetches `https://api.github.com/users/baraazino/repos?sort=updated&per_page=5`, caches responses for three minutes, and surfaces status updates for loading/error/cached states. When rate limits are hit on the live API, the UI automatically loads a bundled JSON snapshot so content stays visible.
 - **Graduation countdown:** Runs a one-second interval to compute remaining days/hours/minutes/seconds until April 2027 and clamps at zero afterward.
 - **Contact form safeguards:** Inline validation, animated feedback, and polite error copy protect against bad submissions without blocking accessibility.
 - **Reveal animations & footer autoupdate:** Sections fade in via `IntersectionObserver`, and the footer year stays current automatically.

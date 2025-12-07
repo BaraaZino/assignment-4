@@ -5,7 +5,7 @@ A polished, production-ready personal site that demonstrates the full SWE 363 to
 ## Highlights
 - **Spotlight focus explorer:** Visitors switch between “About,” “Projects,” and “Goals” blurbs using accessible tabs that animate content swaps.
 - **“I can help you with” services row:** Articulates consulting offerings with cards that complement the CTA and guide visitors toward the contact form.
-- **GitHub activity feed:** Fetches the five most recently updated repositories, caches responses to stay under rate limits, and surfaces languages, topics, stars, and forks with helpful status messaging.
+- **GitHub activity feed:** Pulls live data (when the rate limit allows) and gracefully falls back to a bundled snapshot so the section never looks broken. Languages, topics, stars, and forks all stay visible with informative status messaging.
 - **Projects dashboard:** Sort or hide the project grid via persistent preferences for a customized browsing experience.
 - **Contact + personalization:** Inline validation, prefills powered by saved visitor names, and animated feedback keep the form friendly while still accessible.
 - **Graduation countdown & greeting:** Time-based UI components (countdown, locale-aware greeting) showcase timers, accordions, and aria-driven state changes.
