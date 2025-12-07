@@ -54,27 +54,35 @@
 - **Edits & Integration:** Rewrote the README/technical doc manually using the AI outline, then expanded this log with detailed prompts/outcomes.  
 - **What I Learned:** Writing the report right after coding kept context fresh and made it easier to articulate how AI shaped each feature.
 
-### 7. Impact Roadmap Ideation & Implementation (Assignment 4)
+### 7. Services Section Copy & Structure (Assignment 4)
 - **Tool:** ChatGPT-5 Codex  
-- **Prompt:** “Suggest an innovative yet lightweight feature to capstone my portfolio—ideally something interactive that uses `localStorage`, progress tracking, and accessible controls without external libraries.”  
+- **Prompt:** “Provide copy ideas for an ‘I can help you with’ section: three cards that describe how I collaborate with clients (AI/data, UI polish, team enablement). Keep it concise and action-oriented.”  
 - **AI Output (excerpt):**  
-  > Build a ‘roadmap’ widget where visitors add milestones, toggle completion, and watch a progress bar update. Use delegated events for buttons, persist entries in `localStorage`, and pre-seed with inspirational tasks.  
-- **Edits & Integration:** Adopted the roadmap concept, rewrote the UI copy, implemented the module in `js/script.js`, styled it in `css/styles.css`, and injected the section/navigation into `index.html`.  
-- **What I Learned:** Delegated events plus DocumentFragment rendering keep complex widgets performant. Planning the markup first made the accessibility wiring (aria-live notices, progressbar attributes) simple.
+  > Card 1: AI & Data Experiments… Card 2: Product UI Polish… Card 3: Team Enablement… Include short bullets such as “Fine-tuning LLMs,” “Component-driven HTML/CSS,” etc.  
+- **Edits & Integration:** Used the AI bullets as a baseline but rewrote phrases to match my tone, added context about dashboards and documentation, and implemented the markup (`index.html`) plus styling (`css/styles.css`).  
+- **What I Learned:** Having draft copy from AI speeds up ideation, but manual edits are still needed to keep the language authentic and aligned with my actual services.
 
-### 8. Assignment 4 Documentation & Presentation Assets
+### 8. Theme Toggle UX Refinement
 - **Tool:** ChatGPT-5 Codex  
-- **Prompt:** “Help me update the README and technical docs for Assignment 4, including the roadmap feature, new repo structure, and final deployment notes. Also remind me where to place presentation placeholders.”  
+- **Prompt:** “How can I update my existing theme-toggle button so it swaps to ‘Light mode’ with a sun icon when dark theme is active, without breaking accessibility?”  
 - **AI Output (excerpt):**  
-  > Add a ‘Live Demo’ section, describe the roadmap under highlights, mention `presentation/` assets, and document the new testing steps.  
-- **Edits & Integration:** Rebuilt `README.md`, rewrote `docs/technical-documentation.md`, extended this log, and added placeholder files for `presentation/slides.pdf` plus `presentation/demo-video.mp4`.  
-- **What I Learned:** Keeping docs synchronized with code at every milestone prevents fire drills and helps reviewers understand the end-to-end workflow.
+  > Track the button, its label, and icon; update `aria-pressed`; swap text/icon inside `applyTheme`; ensure widths stay consistent.  
+- **Edits & Integration:** Implemented a `updateToggleUI` helper, wired it into `applyTheme`, and tweaked CSS to give the label a fixed min-width. Also added extra header spacing per my own design eye.  
+- **What I Learned:** Modularizing theme code keeps the UI synced with state, and small CSS tweaks (min-width, gap) prevent layout shifts when labels change.
+
+### 9. Presentation Outline & Storytelling
+- **Tool:** ChatGPT-5 Codex  
+- **Prompt:** “Help me craft a 6–7 minute presentation for this portfolio: include intro, demo beats, architecture overview, AI highlights, deep dive, conclusion, and future work.”  
+- **AI Output (excerpt):**  
+  > Suggested a slide-by-slide structure covering overview, objectives, live demo checklist, technical architecture, AI integration, deep dive, outcomes, future improvements, and Q&A.  
+- **Edits & Integration:** Adapted the outline into my slide deck, swapped in actual screenshots, and customized bullet points with my personal motivations and results.  
+- **What I Learned:** Using AI to scaffold the narrative freed up time to focus on visual polish while still keeping the story organized and within the time box.
 
 ## Benefits
 - Accelerated ideation for UI/UX flows without sacrificing accessibility.
-- Saved time drafting copy (spotlight blurbs, roadmap copy, documentation scaffolding).
+- Saved time drafting copy (spotlight blurbs, services cards, documentation scaffolding).
 - Reduced back-and-forth debugging by validating approaches before coding.
-- Quickly scaffolded the GitHub feed, roadmap widget, stateful controls, and countdown timer without reinventing patterns.
+- Quickly scaffolded the GitHub feed, stateful controls, countdown timer, and assignment polish without reinventing patterns.
 
 ## Challenges
 - Needed to adapt AI suggestions to fit existing styling conventions and naming schemes.
@@ -85,4 +93,4 @@
 - Strengthened knowledge of accessible tab patterns, accordions, inline validation strategies, cached API usage, and stateful UI management.
 - Practiced turning AI-assisted drafts into production-ready copy and code while keeping accountability in the repo history.
 - Documented AI usage in a reproducible format that links prompts, outputs, and final edits for transparency.
-- Built confidence in mixing cached API calls, DOM fragments, timers, and new features (Impact Roadmap) without external libraries.
+- Built confidence in mixing cached API calls, DOM fragments, timers, and new features (services section, theme toggle refinements) without external libraries.
