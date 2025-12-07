@@ -138,6 +138,11 @@ body[data-theme="dark"] .site-header.is-scrolled {
   font-weight: 600;
 }
 
+.theme-toggle__label {
+  min-width: 5.5rem;
+  text-align: center;
+}
+
 .theme-toggle:hover,
 .theme-toggle:focus {
   transform: translateY(-2px);
