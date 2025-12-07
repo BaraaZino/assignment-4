@@ -1,6 +1,37 @@
 const Theme = (() => {
   // Handles theme selection, persistence, and system preference sync.
   const STORAGE_KEY = "portfolio-theme";
+  let toggleButton;
+  let toggleLabel;
+  let toggleIcon;
+
+  const ensureToggleReferences = () => {
+    if (!toggleButton) {
+      toggleButton = document.querySelector(".theme-toggle");
+    }
+    if (toggleButton) {
+      toggleLabel = toggleButton.querySelector(".theme-toggle__label");
+      toggleIcon = toggleButton.querySelector(".theme-toggle__icon");
+    }
+  };
+
+  const updateToggleUI = (currentTheme) => {
+    ensureToggleReferences();
+    if (!toggleButton) {
+      return;
+    }
+
+    const nextMode = currentTheme === "dark" ? "Light mode" : "Dark mode";
+    const nextIcon = currentTheme === "dark" ? "☀️" : "🌙";
+
+    if (toggleLabel) {
+      toggleLabel.textContent = nextMode;
+    }
+    if (toggleIcon) {
+      toggleIcon.textContent = nextIcon;
+    }
+    toggleButton.setAttribute("aria-pressed", currentTheme === "dark" ? "true" : "false");
+  };
 
   const getPreferredTheme = () => {
     const stored = localStorage.getItem(STORAGE_KEY);
@@ -15,6 +46,7 @@ const Theme = (() => {
   const applyTheme = (theme) => {
     document.body.dataset.theme = theme;
     localStorage.setItem(STORAGE_KEY, theme);
+    updateToggleUI(theme);
   };
 
   const toggleTheme = () => {
@@ -45,7 +77,8 @@ const Theme = (() => {
   const init = () => {
     applyTheme(getPreferredTheme());
 
-    const toggleButton = document.querySelector(".theme-toggle");
+    ensureToggleReferences();
+
     if (toggleButton) {
       // Let users flip the theme manually.
       toggleButton.addEventListener("click", toggleTheme);
