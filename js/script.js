@@ -611,6 +611,7 @@ const GraduationCountdown = (() => {
 
   return { init };
 })();
+
 // displayed error to user depending of what is the error when trying to submit
 const ContactForm = (() => {
   const FIELD_CONFIG = {

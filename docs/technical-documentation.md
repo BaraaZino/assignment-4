@@ -1,59 +1,55 @@
 # Technical Documentation
 
 ## Overview
-This project is a responsive single-page portfolio site built with HTML, CSS, and vanilla JavaScript. Assignment 3 adds live GitHub API data, sortable project listings, stateful show/hide controls, and a graduation countdown on top of the personalized greeting and enhanced contact form deliverables from Assignment 2.
+Assignment 4 delivers the production-ready version of my single-page portfolio. It preserves the proven foundations from earlier assignments (personalization, GitHub feed, countdown, validation, documentation) and focuses on polish, accessibility, and deployment readiness.
 
 ## Architecture
-- `index.html` defines the semantic layout for About, Experience, Skills, Projects & Research, Awards, Spotlight, Contact, the GitHub activity feed, and the graduation countdown section.
-- `css/styles.css` styles the UI using CSS custom properties, Flexbox, and Grid to provide responsiveness, transitions, section reveals, and state styling, plus new patterns for control panels, API cards, and the countdown.
-- `js/script.js` organizes interactive features (theme, spotlight, personalization, project controls, GitHub fetch, countdown, etc.) into modules that initialize after the DOM is loaded. 
-- `assets/images/` contains images that are used in the webpage.
+- `index.html` defines semantic sections for About, Experience, Spotlight, Projects & Research, GitHub activity, Skills, the “I Can Help You With” services overview, Awards, Countdown, and Contact.
+- `css/styles.css` hosts the end-to-end design system built on CSS custom properties, Flexbox, and Grid, including styles for spotlight toggles, GitHub cards, services grid, countdown timer, forms, and reveal animations.
+- `js/script.js` bundles each interaction into an isolated module that initializes on `DOMContentLoaded` (theme toggle, personalization, spotlight, project controls, GitHub fetcher, countdown, contact form validation, etc.).
+- `assets/images/` contains hero/project imagery, while `presentation/` stores the slide deck and demo video placeholders needed for submission packaging.
 
 ## Responsive Design Strategy
-- Uses CSS Grid for the project gallery, awards showcase, and experience cards, automatically fitting content based on available width.
-- Applies Flexbox for header alignment, hero call-to-actions, and footer spacing.
-- Media queries at 900px and 600px adjust layout: the hero collapses to a single column on tablets and navigation stacks vertically on mobile.
-- Typography scales with `clamp()` to maintain readability on different viewports.
+- CSS Grid powers experience cards, awards, services grid, project gallery, GitHub feed, and countdown segments so layouts adapt naturally.
+- Flexbox manages header alignment, hero CTAs, contact form layout, and footer spacing.
+- Media queries at 900px and 600px collapse the hero into a single column, wrap navigation links, and adjust spacing for phones.
+- Typography leverages `clamp()` plus relative units to remain legible across devices.
 
 ## JavaScript Features
-- **Theme toggle:** Persisted light/dark mode via `localStorage`, with a fallback to the user's system preference.
-- **Personalization module:** Stores a preferred visitor name in `localStorage`, updates the hero greeting on the fly, and provides reset controls.
-- **Spotlight toggles:** Buttons switch between focus-area cards using accessible `aria-selected` and `aria-controls` bindings.
-- **Project accordions:** Each project card includes an expandable detail section with `aria-expanded` state tracking.
-- **Project controls:** Sorting logic reorders cards efficiently, while show/hide state persists so visitors can collapse the section entirely.
-- **GitHub feed:** Fetches repositories from the GitHub API, caches results for three minutes, and surfaces status updates for loading/error states.
-- **Graduation countdown:** Calculates the remaining time until April 2027 and updates the DOM each second, stopping gracefully once the date is reached.
-- **Enhanced contact form:** Inline error messaging, `aria-invalid` states, and animated status feedback keep users informed.
-- **Reveal animations:** Sections tagged with `data-animate` fade and slide in using `IntersectionObserver`.
-- **Footer year:** Automatically injects the current year in the footer to keep content up to date.
-
-All modules are initialized on the `DOMContentLoaded` event to ensure DOM elements are available before interaction.
+- **Theme toggle:** Persists light/dark preference, syncs with OS settings, and updates instantly.
+- **Personalization module:** Stores a visitor's preferred name, reflects it in greetings, and injects it into the contact form when possible.
+- **Spotlight tabs:** Accessible buttons (`aria-selected`, `aria-controls`) animate between focus-area cards.
+- **Project cards:** Accordions expose extra project details while `localStorage` tracks grid sorting and visibility preferences.
+- **GitHub feed:** Fetches `https://api.github.com/users/baraazino/repos?sort=updated&per_page=5`, caches responses for three minutes, and surfaces status updates for loading/error/cached states.
+- **Graduation countdown:** Runs a one-second interval to compute remaining days/hours/minutes/seconds until April 2027 and clamps at zero afterward.
+- **Contact form safeguards:** Inline validation, animated feedback, and polite error copy protect against bad submissions without blocking accessibility.
+- **Reveal animations & footer autoupdate:** Sections fade in via `IntersectionObserver`, and the footer year stays current automatically.
 
 ## API Integration
-- The `GitHubFeed` module requests `https://api.github.com/users/baraazino/repos?sort=updated&per_page=5` with the `application/vnd.github+json` accept header so metadata such as topics and languages are returned.
-- Responses are cached for three minutes to avoid hitting rate limits; refresh requests within that window reuse cached data and show a status banner that informs the user.
-- Error handling covers API failures, empty repositories, and offline states with friendly messaging in the UI instead of silent failures.
+- Only the GitHub feed calls external data, so no backend is required. Requests include the `application/vnd.github+json` header to receive metadata such as topics.
+- Responses are cached client-side; clicking the refresh button bypasses the cache intentionally when needed.
+- Failures (network, rate-limit, empty data) update a status banner so the UI never appears broken.
 
 ## Performance Considerations
-- Project cards and supporting imagery use `loading="lazy"` plus async decoding so off-screen content does not block the hero section.
-- DOM updates for both GitHub repositories and project sorting use `DocumentFragment` to minimize layout thrash and repaint cost.
-- Project sorting logic works off `data-*` attributes and `DocumentFragment`, so no expensive re-rendering or templating is required.
-- Cached API data, shared button styles, and CSS custom properties keep the bundle lightweight without additional tooling.
+- Lazy-loaded images, async decoding, and a lean asset footprint keep First Contentful Paint low.
+- DOM writes batch via `DocumentFragment` in both the GitHub feed renderer and the project sorter to minimize layout thrash.
+- Event listeners are scoped to specific modules, and most state (theme, personalization, project preferences) resides in `localStorage` to avoid unnecessary recompute.
+- Local caching of the GitHub feed limits API calls; everything else executes locally without third-party libraries.
 
 ## Accessibility Considerations
-- Semantic HTML elements (`header`, `nav`, `main`, `section`, `footer`) support screen reader navigation.
-- `aria-live` regions announce dynamic greeting, personalization notices, and form feedback updates.
-- Spotlight toggles expose `role="tab"` semantics and tie buttons to panels through `aria-controls`.
-- Project detail buttons manage `aria-expanded`, while inputs set `aria-invalid` when validation fails.
-- Color contrast values were selected to retain readability in both light and dark modes, and focus states are visible on interactive elements.
+- Semantic landmarks (`header`, `nav`, `main`, `section`, `footer`) provide a logical reading order.
+- `aria-live` regions announce greeting updates, GitHub status, and form feedback in assistive tech.
+- Spotlight tabs, project accordions, and theme toggles expose clear focus outlines and ARIA attributes for state.
+- Inputs respect native validation plus descriptive error copy; reduced-motion users still see content thanks to IntersectionObserver fallbacks.
 
 ## Running Locally
-No build tools are required. Open `index.html` in any modern browser. For live reloading, serve the project directory with a lightweight HTTP server such as `python -m http.server` or VS Code Live Server.
+Open `index.html` directly or serve the repository with a lightweight HTTP server (e.g., `python -m http.server`). No bundlers or package installs are required.
 
 ## Testing and Validation
-- Manually resized the browser window to verify responsive breakpoints, countdown layout, and GitHub card wrapping.
-- Tested personalization: stored a name, refreshed the page to confirm persistence, and cleared the preference.
-- Exercised spotlight toggles, project accordions, and the sort/show controls with both keyboard and pointer inputs.
-- Verified the GitHub API feed handles success, cached, and forced-refresh paths (with DevTools simulating offline conditions for the error message).
-- Validated contact form behaviors (inline errors and success messaging) in desktop Chrome.
-- Checked theme toggle persistence plus countdown accuracy by advancing the system clock to ensure it clamps at zero.
+- Resized the viewport to confirm responsive breakpoints across hero, grid sections, GitHub feed, and countdown.
+- Exercised personalization storage, greeting updates, and contact form prefills (including clearing preferences).
+- Triggered spotlight controls, project accordions, sorting, and section visibility toggles via keyboard + pointer to confirm focus handling.
+- Verified GitHub feed flows: initial load, cached replay, forced refresh, and offline error messaging.
+- Advanced the system clock to ensure the countdown clamps at zero, then displays celebratory copy.
+- Confirmed contact form validation states (value missing, type mismatch, min length) and success messaging animations.
+- Checked that presentation artifacts resolve in the `presentation/` directory for packaging.

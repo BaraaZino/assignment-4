@@ -274,7 +274,7 @@ body[data-theme="dark"] .name-preference input {
 
 .hero-image {
   justify-self: center;
-  width: min(320px, 80%);
+  width: min(520px, 95%);
 }
 
 .cta {
@@ -390,6 +390,7 @@ body[data-theme="dark"] .spotlight {
 .projects,
 .github,
 .awards,
+.services,
 .countdown,
 .skills,
 .contact {
@@ -732,6 +733,7 @@ body[data-theme="dark"] .project-controls {
   font-weight: 600;
 }
 
+
 .awards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -766,6 +768,42 @@ body[data-theme="dark"] .project-controls {
   border-radius: 0.9rem;
   box-shadow: var(--shadow-sm);
   font-weight: 500;
+}
+
+.services {
+  background: linear-gradient(180deg, rgba(37, 99, 235, 0.06), transparent 65%);
+}
+
+body[data-theme="dark"] .services {
+  background: linear-gradient(180deg, rgba(96, 165, 250, 0.12), transparent 65%);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.service-card {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: 1.8rem;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.service-card h3 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.service-card ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.4rem;
+  color: var(--color-muted);
 }
 
 .contact-container {
@@ -939,6 +977,7 @@ body[data-theme="dark"] .site-footer {
   .site-nav .nav-list {
     gap: 1rem;
   }
+
 }
 
 @media (max-width: 600px) {
@@ -986,4 +1025,5 @@ body[data-theme="dark"] .site-footer {
   .countdown-timer {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
 }

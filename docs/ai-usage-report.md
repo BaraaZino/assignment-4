@@ -1,7 +1,7 @@
 # AI Usage Report
 
 ## Tools Used
-- **ChatGPT-5 Codex:** Primary collaborator for ideation, code generation, debugging, accessibility checks, and documentation review across Assignments 2 and 3.
+- **ChatGPT-5 Codex:** Primary collaborator for ideation, code generation, debugging, accessibility checks, and documentation review across Assignments 2–4.
 
 
 ## Detailed Log
@@ -54,11 +54,27 @@
 - **Edits & Integration:** Rewrote the README/technical doc manually using the AI outline, then expanded this log with detailed prompts/outcomes.  
 - **What I Learned:** Writing the report right after coding kept context fresh and made it easier to articulate how AI shaped each feature.
 
+### 7. Impact Roadmap Ideation & Implementation (Assignment 4)
+- **Tool:** ChatGPT-5 Codex  
+- **Prompt:** “Suggest an innovative yet lightweight feature to capstone my portfolio—ideally something interactive that uses `localStorage`, progress tracking, and accessible controls without external libraries.”  
+- **AI Output (excerpt):**  
+  > Build a ‘roadmap’ widget where visitors add milestones, toggle completion, and watch a progress bar update. Use delegated events for buttons, persist entries in `localStorage`, and pre-seed with inspirational tasks.  
+- **Edits & Integration:** Adopted the roadmap concept, rewrote the UI copy, implemented the module in `js/script.js`, styled it in `css/styles.css`, and injected the section/navigation into `index.html`.  
+- **What I Learned:** Delegated events plus DocumentFragment rendering keep complex widgets performant. Planning the markup first made the accessibility wiring (aria-live notices, progressbar attributes) simple.
+
+### 8. Assignment 4 Documentation & Presentation Assets
+- **Tool:** ChatGPT-5 Codex  
+- **Prompt:** “Help me update the README and technical docs for Assignment 4, including the roadmap feature, new repo structure, and final deployment notes. Also remind me where to place presentation placeholders.”  
+- **AI Output (excerpt):**  
+  > Add a ‘Live Demo’ section, describe the roadmap under highlights, mention `presentation/` assets, and document the new testing steps.  
+- **Edits & Integration:** Rebuilt `README.md`, rewrote `docs/technical-documentation.md`, extended this log, and added placeholder files for `presentation/slides.pdf` plus `presentation/demo-video.mp4`.  
+- **What I Learned:** Keeping docs synchronized with code at every milestone prevents fire drills and helps reviewers understand the end-to-end workflow.
+
 ## Benefits
 - Accelerated ideation for UI/UX flows without sacrificing accessibility.
-- Saved time drafting copy (spotlight blurbs, AI suggestions, documentation scaffolding).
+- Saved time drafting copy (spotlight blurbs, roadmap copy, documentation scaffolding).
 - Reduced back-and-forth debugging by validating approaches before coding.
-- Quickly scaffolded the Assignment 3 GitHub feed, sorting logic, and countdown timer without reinventing patterns.
+- Quickly scaffolded the GitHub feed, roadmap widget, stateful controls, and countdown timer without reinventing patterns.
 
 ## Challenges
 - Needed to adapt AI suggestions to fit existing styling conventions and naming schemes.
@@ -66,7 +82,7 @@
 - API-centric prompts occasionally returned fetch examples using frameworks, so I reworked them into vanilla modules.
 
 ## Learning Outcomes
-- Strengthened knowledge of accessible tab patterns, accordions, inline validation strategies, and now sort/toggle UI management.
-- Practiced turning AI-assisted drafts into production-ready copy and code while leaving space for personal commentary.
+- Strengthened knowledge of accessible tab patterns, accordions, inline validation strategies, cached API usage, and stateful UI management.
+- Practiced turning AI-assisted drafts into production-ready copy and code while keeping accountability in the repo history.
 - Documented AI usage in a reproducible format that links prompts, outputs, and final edits for transparency.
-- Built confidence in mixing cached API calls, DOM fragments, and animation-friendly timers without external libraries.
+- Built confidence in mixing cached API calls, DOM fragments, timers, and new features (Impact Roadmap) without external libraries.
